@@ -8,23 +8,24 @@ import (
 	"strings"
 )
 
-var result int
-var resultrim = "no rim"
-var err1 string = "no"
-var boolprov bool
-var namone, oper, namone2, summ string
-var arr []string
-
 func main() {
+	var result int
+	var resultrim = "no rim"
+	var err1 string = "no"
+	var boolprov bool
+	var namone, oper, namone2, summ string
+	var arr []string
+
 	fmt.Println("передайте данные ")
 	reader := bufio.NewReader(os.Stdin)
 	input, _ := reader.ReadString('\n')
-	if len(input) < 4 {
-		err1 = "Вывод ошибки, так как строка не является математической операцией."
-	} else if len(input) > 4 {
-		err1 = "Вывод ошибки, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)."
+	arr = strings.Split(input, " ")
+
+	if len(arr) > 3 {
+		err1 = "Вывод ошибки, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)1."
+	} else if len(input) < 3 {
+		panic("Вывод ошибки, так как строка не является математической операцией.")
 	} else {
-		arr = strings.Split(input, " ")
 		namone = arr[0]
 		oper = arr[1]
 		namone2 = arr[2]
@@ -49,11 +50,11 @@ func main() {
 		} else if oper == "/" {
 			result = a1 / a2
 		} else {
-			err1 = "Вывод ошибки, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)."
+			err1 = "Вывод ошибки, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)2."
 		}
 		boolprov = true
 	}
-	rimrar := []string{"I", "II", "III", "IV", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL", "XLI", "XLII", "XLIII", "XLIV", "XLVI", "XLVII", "XLIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LVI", "LVII", "LVIII", "LIX", "LX", "LXI", "LXII", "LXIII", "LXIV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX", "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX", "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"}
+	rimrar := []string{"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL", "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX", "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX", "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX", "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"}
 	var znatsh1, znatsh2 = 0, 0
 	for i, v := range rimrar {
 		if namone == v {
@@ -69,29 +70,29 @@ func main() {
 		if oper == "-" {
 			result = a1 - a2
 			if result <= 0 {
-				err1 = "Вывод ошибки, так как в римской системе нет отрицательных чисел."
+				panic("Вывод ошибки, так как в римской системе нет отрицательных чисел.")
 			}
-			resultrim = rimrar[result+1]
+			resultrim = rimrar[result-1]
 		} else if oper == "+" {
 			result = a1 + a2
 			if result <= 0 {
-				err1 = "Вывод ошибки, так как в римской системе нет отрицательных чисел."
+				panic("Вывод ошибки, так как в римской системе нет отрицательных чисел.")
 			}
-			resultrim = rimrar[result+1]
+			resultrim = rimrar[result-1]
 		} else if oper == "*" {
 			result = a1 * a2
 			if result <= 0 {
-				err1 = "Вывод ошибки, так как в римской системе нет отрицательных чисел."
+				panic("Вывод ошибки, так как в римской системе нет отрицательных чисел.")
 			}
-			resultrim = rimrar[result+1]
+			resultrim = rimrar[result-1]
 		} else if oper == "/" {
 			result = a1 / a2
 			if result <= 0 {
-				err1 = "Вывод ошибки, так как в римской системе нет отрицательных чисел."
+				panic("Вывод ошибки, так как в римской системе нет отрицательных чисел.")
 			}
-			resultrim = rimrar[result+1]
+			resultrim = rimrar[result-1]
 		} else {
-			err1 = "Вывод ошибки, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)."
+			err1 = "Вывод ошибки, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)3."
 		}
 		boolprov = true
 	}
